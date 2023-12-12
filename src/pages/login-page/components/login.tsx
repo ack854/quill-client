@@ -5,12 +5,23 @@ import { Button, ButtonProps, Container, styled } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
 import { regEx } from "../../../constants/regEx";
+import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
+
 const SaveButton = styled(Button)<ButtonProps>(() => ({
   backgroundColor: "#16a085",
   "&:hover": {
     backgroundColor: "#0e806a",
   },
 }));
+
+const showValidation = (validation: string) => {
+  return (
+    <div className="flex text-red-600 items-center">
+      <ErrorOutlineOutlinedIcon sx={{ fontSize: 18 }} />
+      <span className="block	text-left">{validation}</span>
+    </div>
+  );
+};
 
 type ILoginData = { email: string; password: string };
 
@@ -55,19 +66,21 @@ const Login = () => {
     const errors: ILoginData = { email: "", password: "" };
     if (data.email === "") {
       errors.email = "Email/Phone number is required.";
-    }
-    else if(regEx.numbersOnly.test(data.email)) {
-      if(data.email.length !== 10) {
-        errors.email = "Phone number should be exactly 10 digits"
+    } else if (regEx.numbersOnly.test(data.email)) {
+      if (data.email.length !== 10) {
+        errors.email = "Phone number should be exactly 10 digits";
       }
     }
     // Example validation: Check if email is a valid email address
     else if (!regEx.emailPattern.test(data.email)) {
       errors.email = "Invalid Email address/Phone number.";
     }
+    if (data.password === "") {
+      errors.password = "Password is required.";
+    }
 
     // Example validation: Check if password is at least 6 characters long
-    if (data.password.length < 6) {
+    else if (data.password.length < 6) {
       errors.password = "Password must be at least 6 characters";
     }
 
@@ -95,11 +108,7 @@ const Login = () => {
                 value={formData.email}
                 onChange={handleChange}
               />
-              {errors?.email && (
-                <span className="text-red-600 block text-left">
-                  {errors?.email}
-                </span>
-              )}
+              {errors?.email && showValidation(errors?.email)}
             </div>
             <div className="row">
               <KeyIcon
@@ -114,11 +123,7 @@ const Login = () => {
                 name="password"
                 onChange={handleChange}
               />
-              {errors?.password && (
-                <span className="text-red-600 block	text-left">
-                  {errors?.password}
-                </span>
-              )}
+              {errors?.password && showValidation(errors?.password)}
             </div>
             <div className="pass mt-10">
               <a href="#">Forgot password?</a>
