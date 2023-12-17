@@ -201,8 +201,8 @@ const StyledTreeItem = React.forwardRef(function StyledTreeItem(
             <Box component={LabelIcon} color="inherit" sx={{ mr: 1 }} />
             <Typography
               variant="body2"
-              sx={{ fontWeight: "inherit", flexGrow: 1 }}
-              className="pl-3 text-base"
+              sx={{ fontWeight: "550",lineHeight:'31px', flexGrow: 1, fontSize:"medium" }}
+              className="pl-3"
             >
               {labelText}
             </Typography>
@@ -241,13 +241,13 @@ const SideMenu = () => {
         >
           <div className=" my-6 grid grid-cols-10 grid-flow-row gap-1">
             <div className="col-span-9 text-left font-bold text-xl ml-8">
-              uBlog
+              Quill
             </div>
-            <SearchOutlinedIcon className="col-span-1" />
+            <SearchOutlinedIcon className="col-span-1 cursor-pointer" />
           </div>
           <TreeView
             aria-label="gmail"
-            defaultExpanded={["3"]}
+            defaultExpanded={[""]}
             defaultCollapseIcon={<ArrowDropDownIcon />}
             defaultExpandIcon={<ArrowRightIcon />}
             defaultEndIcon={<div style={{ width: 24 }} />}
@@ -298,11 +298,21 @@ const Dashboard = () => {
           <div className="md:col-span-1">{SideMenu()}</div>
           <div className="md:col-span-4 mt-9">
             <DashboardHeader />
-            <div className=" h-full mt-5 grid grid-rows-3 grid-flow-col gap-4">
+            <div className=" h-screen mt-5 grid grid-rows-3 grid-flow-col gap-4">
               <div className="row-span-1">
                 <RevenueDetails />
               </div>
-              <div className="row-span-1"></div>
+              <div className="row-span-1">
+                <Paper
+                  sx={{
+                    width: "97%",
+                    backgroundColor: (theme) =>
+                      theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+                  }}
+                  className="h-full"
+                ></Paper>
+              </div>
+              <div className="row-span-1">3</div>
             </div>
           </div>
         </div>

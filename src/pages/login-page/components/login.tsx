@@ -6,6 +6,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
 import { regEx } from "../../../constants/regEx";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
+import axios from "axios";
+import { environment } from "../../../environments/environment";
 
 const SaveButton = styled(Button)<ButtonProps>(() => ({
   backgroundColor: "#16a085",
@@ -24,6 +26,24 @@ const showValidation = (validation: string) => {
 };
 
 type ILoginData = { email: string; password: string };
+
+const onSignupClick = () => {
+  const user = {
+    first_name: "Arun",
+    last_name: "C K",
+    email: "arunappu918@gmail.com",
+    password: "Arun@918",
+  };
+  axios
+    .get(`${environment.baseUrl}/api/v1/auth/signup`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+    });
+};
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -149,7 +169,7 @@ const Login = () => {
                 </span>
               </SaveButton>
             </div>
-            <div className="signup-link">
+            <div className="signup-link" onClick={() => onSignupClick()}>
               Not a member? <a href="#">Signup now</a>
             </div>
           </form>

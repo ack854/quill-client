@@ -1,6 +1,60 @@
 import { Paper } from "@mui/material";
 import { Chart } from "react-google-charts";
 
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+} from "chart.js";
+import { Bar, Line } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+const options1 = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+    datalabels: {
+      display: false,
+    },
+    title: {
+      display: false,
+      text: "",
+    },
+  },
+};
+
+const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
+
+const data1 = {
+  labels,
+  datasets: [
+    {
+      label: "",
+      data: [3500, 4500, 4700, 4300, 4800, 4300, 6000],
+      borderColor: "#29b6f6",
+      backgroundColor: "#29b6f6",
+    },
+  ],
+};
+
 const data = [
   ["Month", "Income(₹)"],
   ["May", 47250],
@@ -30,13 +84,11 @@ const RevenueDetails = () => {
         }}
         className="h-full"
       >
-        <div className="h-full grid grid-cols-6 grid-flow-row gap-1">
-          <div className="col-span-1">
+        <div className="h-full grid grid-cols-6 grid-flow-row gap-4">
+          <div className="col-span-1 h-[65%]">
             <div className="text-left h-full grid grid-rows-2 grid-flow-col gap-0">
               <div className="text-left h-full ml-3 mt-3 grid grid-rows-3 grid-flow-col gap-0">
-                <div className="row-span-1 text-xs font-bold">
-                  MRR
-                </div>
+                <div className="row-span-1 text-xs font-bold">MRR</div>
                 <div className="row-span-1 font-bold text-3xl">$ 17,642</div>
                 <div className=" bg-lime-200 w-fit inline-block mt-2 h-fit text-left row-span-1 text-xs font-bold text-green-500">
                   +2.1%
@@ -44,17 +96,12 @@ const RevenueDetails = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-3">
-            <Chart
-              chartType="LineChart"
-              data={data}
-              options={options}
-              height={"90%"}
-            />
+          <div className="col-span-3 h-[65%]">
+            <Line options={options1} data={data1} />;
           </div>
-          <div className="col-span-2">
-            <div className=" h-full grid grid-rows-3 mt-3 grid-flow-col gap-1">
-              <div>
+          <div className="col-span-2 h-[65%]">
+            <div className=" h-full grid grid-rows-3 grid-flow-col gap-1">
+              <div className="row-span-1">
                 <div className="h-full grid grid-cols-2 grid-flow-row gap-1">
                   <div className="text-left h-full grid grid-rows-4 grid-flow-col gap-0">
                     <div className="row-span-1 text-xs font-bold">
@@ -66,16 +113,11 @@ const RevenueDetails = () => {
                     </div>
                   </div>
                   <div>
-                    <Chart
-                      chartType="LineChart"
-                      data={data}
-                      options={options}
-                      height={"50%"}
-                    />
+                    <Line options={options1} data={data1} />;
                   </div>
                 </div>
               </div>
-              <div>
+              <div className="row-span-1">
                 <div className="h-full grid grid-cols-2 grid-flow-row gap-1">
                   <div className="text-left h-full grid grid-rows-4 grid-flow-col gap-0">
                     <div className="row-span-1 text-xs font-bold">
@@ -87,16 +129,11 @@ const RevenueDetails = () => {
                     </div>
                   </div>
                   <div>
-                    <Chart
-                      chartType="LineChart"
-                      data={data}
-                      options={options}
-                      height={"50%"}
-                    />
+                    <Line options={options1} data={data1} />;
                   </div>
                 </div>
               </div>
-              <div>
+              <div className="row-span-1">
                 <div className="h-full grid grid-cols-2 grid-flow-row gap-1">
                   <div className="text-left h-full grid grid-rows-4 grid-flow-col gap-0">
                     <div className="row-span-1 text-xs font-bold">
@@ -108,12 +145,7 @@ const RevenueDetails = () => {
                     </div>
                   </div>
                   <div>
-                    <Chart
-                      chartType="Bar"
-                      data={data}
-                      options={options}
-                      height={"50%"}
-                    />
+                    <Bar options={options1} data={data1} />;
                   </div>
                 </div>
               </div>
