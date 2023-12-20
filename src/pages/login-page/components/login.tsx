@@ -35,7 +35,7 @@ const onSignupClick = () => {
     password: "Arun@918",
   };
   axios
-    .get(`${environment.baseUrl}/api/v1/auth/signup`, {
+    .post(`${environment.baseUrl}/api/v1/auth/signup`, user, {
       headers: {
         "Content-Type": "application/json",
       },
