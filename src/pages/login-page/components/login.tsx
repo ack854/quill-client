@@ -35,8 +35,8 @@ const onSignupClick = () => {
   const user = {
     first_name: "Arun",
     last_name: "C K",
-    email: "arunappu918@gmail.com",
-    password: "Arun@918",
+    email: "arunappu@gmail.com",
+    password: "Arun@123",
   };
   axios
     .post(`${environment.baseUrl}/api/v1/auth/signup`, user, {
@@ -93,6 +93,7 @@ const Login = () => {
           },
         })
         .then((res) => {
+          console.log(res)
           if (res && res?.data?.status === Status.Success) {
             navigate("/dashboard");
           } else {
