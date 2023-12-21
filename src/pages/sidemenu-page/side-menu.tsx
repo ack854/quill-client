@@ -246,7 +246,7 @@ const StyledTreeItem = React.forwardRef(function StyledTreeItem(
 });
 
 const onTreeItemClick = (item: any) => {
-  //console.log(item);
+  console.log(item);
 };
 
 const onEndIconClick = (item: any) => {

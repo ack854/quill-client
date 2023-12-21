@@ -2,12 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.scss";
+import Login from "./pages/login-page/components/login.tsx";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App/>
+    {/* <Login /> */}
+    <Router>
+      <Routes>
+        <Route path="/login" Component={Login} />
+        <Route path="*" Component={App} />
+      </Routes>
+    </Router>
+    {/* <App/> */}
   </React.StrictMode>
 );
