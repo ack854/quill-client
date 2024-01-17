@@ -56,7 +56,7 @@ const data1 = {
 
 const RevenueDetails = () => {
   return (
-    <div className="h-full w-full">
+    <div className="w-full">
       <Paper
         sx={{
           width: "97%",

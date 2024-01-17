@@ -11,6 +11,7 @@ import { environment } from "../../../environments/environment";
 import { useNavigate } from "react-router-dom";
 import { Status } from "../../../constants/enums/responseStatus";
 import { ToastContainer, toast } from "react-toastify";
+import ContactMailOutlinedIcon from "@mui/icons-material/ContactMailOutlined";
 import "react-toastify/dist/ReactToastify.css";
 
 const SaveButton = styled(Button)<ButtonProps>(() => ({
@@ -29,19 +30,28 @@ const showValidation = (validation: string) => {
   );
 };
 
-type ILoginData = { email: string; password: string };
+type ILoginData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+};
 
-const Login = () => {
+const Signup = () => {
   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
-  const onSignupClick = () => {
-    navigate("/signup");
-  };
   const navigate = useNavigate();
 
-  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (e: any) => {
@@ -72,7 +82,7 @@ const Login = () => {
       //window.location.href === `${environment.devUrl}/dashboard`;
 
       axios
-        .post(`${environment.baseUrl}/api/v1/auth/signin`, formData, {
+        .post(`${environment.baseUrl}/api/v1/auth/signup`, formData, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -82,18 +92,18 @@ const Login = () => {
           if (res && res?.data?.status === Status.Success) {
             toast.success("Signed in successfully!", {
               position: toast.POSITION.BOTTOM_RIGHT,
-              style: { textAlign: "left" },
-              // style: {
-              //   background: "rgb(217 249 157)",
-              // },
-              autoClose: 5000,
+              style: {
+                // background: "rgb(217 249 157)",
+                textAlign: "left",
+              },
+              autoClose: 4000,
               onClose: () => {
                 // Navigate to another screen after the toast is closed
                 navigate("/dashboard");
               },
             });
           } else {
-            toast.error(res?.data?.message, {
+            toast.error("Signin failed!", {
               position: toast.POSITION.BOTTOM_RIGHT,
               style: {
                 background: "rgb(254 202 202)",
@@ -106,7 +116,12 @@ const Login = () => {
   };
 
   const validateForm = (data: ILoginData) => {
-    const errors: ILoginData = { email: "", password: "" };
+    const errors: ILoginData = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    };
     if (data.email === "") {
       errors.email = "Email/Phone number is required.";
     } else if (regEx.numbersOnly.test(data.email)) {
@@ -120,6 +135,12 @@ const Login = () => {
     }
     if (data.password === "") {
       errors.password = "Password is required.";
+    }
+    if (data.firstName === "") {
+      errors.firstName = "First Name is required.";
+    }
+    if (data.lastName === "") {
+      errors.lastName = "Last Name is required.";
     }
 
     // Example validation: Check if password is at least 6 characters long
@@ -141,6 +162,36 @@ const Login = () => {
             <form action="#" onSubmit={handleSubmit}>
               <div className="row">
                 <AccountCircleIcon
+                  style={{ width: "47px", height: "100%" }}
+                  className="absolute user-icon"
+                />
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  required
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                />
+                {errors?.firstName && showValidation(errors?.firstName)}
+              </div>
+              <div className="row">
+                <AccountCircleIcon
+                  style={{ width: "47px", height: "100%" }}
+                  className="absolute user-icon"
+                />
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  required
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                />
+                {errors?.lastName && showValidation(errors?.lastName)}
+              </div>
+              <div className="row">
+                <ContactMailOutlinedIcon
                   style={{ width: "47px", height: "100%" }}
                   className="absolute user-icon"
                 />
@@ -169,9 +220,6 @@ const Login = () => {
                 />
                 {errors?.password && showValidation(errors?.password)}
               </div>
-              <div className="pass mt-10">
-                <a href="#">Forgot password?</a>
-              </div>
               <div className="button-save">
                 <SaveButton
                   variant="contained"
@@ -189,12 +237,9 @@ const Login = () => {
                   onClick={handleSubmit}
                 >
                   <span className="t-15 font-inter text-lg leading-snug">
-                    Signin
+                    Signup
                   </span>
                 </SaveButton>
-              </div>
-              <div className="signup-link" onClick={() => onSignupClick()}>
-                Not a member? <a href="#">Signup now</a>
               </div>
             </form>
           </div>
@@ -205,4 +250,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

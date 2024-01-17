@@ -95,6 +95,7 @@ const treeViewContents = [
     labelText: "Posts",
     labelIcon: CreateOutlinedIcon,
     endIcon: { icon: AddOutlinedIcon, name: "add post" },
+    url: "/posts",
     childs: [
       {
         parentNodeId: "3",
@@ -106,11 +107,13 @@ const treeViewContents = [
         parentNodeId: "3",
         nodeId: "10",
         labelText: "Drafts",
+        url: "/posts/drafts",
       },
       {
         parentNodeId: "3",
         nodeId: "11",
         labelText: "Scheduled",
+        url: "/posts/scheduled",
       },
       {
         parentNodeId: "3",
@@ -156,7 +159,7 @@ const treeViewContents = [
     nodeId: "6",
     labelText: "Members",
     labelIcon: GroupsOutlinedIcon,
-    labelInfo: "3862",
+    labelInfo: "62",
   },
   {
     nodeId: "7",
@@ -228,11 +231,17 @@ const StyledTreeItem = React.forwardRef(function StyledTreeItem(
               sx={{ mr: 1 }}
               onClick={() => onEndIconClick(props)}
             />
-            <div className="bg-slate-300 rounded-[30%]">
-              <Typography variant="caption" color="inherit">
-                {labelInfo}
-              </Typography>
-            </div>
+            {labelInfo && (
+              <div className="bg-slate-300 rounded-[30%]">
+                <Typography
+                  variant="caption"
+                  color="inherit"
+                  sx={{ marginX: "6px" }}
+                >
+                  {labelInfo}
+                </Typography>
+              </div>
+            )}
             <div>{endDiv}</div>
           </Box>
         </Link>

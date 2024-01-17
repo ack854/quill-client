@@ -8,7 +8,7 @@ const Layout = ({ children }: {children: any}) => {
           <div className="md:col-span-1">
             <SideMenu />
           </div>
-          <div className="md:col-span-4 mt-9">{children}</div>
+          <div className="md:col-span-4 mt-9 h-full">{children}</div>
         </div>
       </div>
     </div>

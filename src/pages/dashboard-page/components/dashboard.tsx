@@ -10,9 +10,9 @@ import PostAddOutlinedIcon from "@mui/icons-material/PostAddOutlined";
 const Dashboard = () => {
   return (
     <>
-      <DashboardHeader />
-      <div className=" h-screen mt-5 grid grid-rows-2 grid-flow-col gap-4">
+      <div className=" h-full grid grid-rows-2 grid-flow-col gap-4">
         <div className="row-span-1">
+          <div className="mb-4"><DashboardHeader /></div>
           <RevenueDetails />
         </div>
         <div className="row-span-1">
@@ -63,7 +63,7 @@ const Dashboard = () => {
                               </span>
                             </div>
                           </div>
-                          <div className="text-left ml-5">
+                          <div className="text-left ml-5 flex">
                             <PostAddOutlinedIcon
                               sx={{
                                 background: "#64b464",
@@ -72,9 +72,12 @@ const Dashboard = () => {
                                 color: "white",
                               }}
                             />
-                            <span className="font-bold ml-3">
+                            <div className="flex flex-col ml-3">
+                            <span className="font-bold">
                               Publish a post
                             </span>
+                            <span>Get familiar with the Ghost Editor and start creating</span>
+                            </div>
                           </div>
                         </div>
                       </div>
